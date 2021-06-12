@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
-    public float speed = 6f;
+    public float walkSpeed = 6f;
+    public float runSpeed = 10f;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -15,6 +16,18 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        bool isRunning = Input.GetButton("Sprint");
+        float speed;
+
+        if(isRunning)
+        {
+            speed = runSpeed;
+        }
+        else
+        {
+            speed = walkSpeed;
+        }
 
         if (direction.magnitude >= 0.1f)
         {
